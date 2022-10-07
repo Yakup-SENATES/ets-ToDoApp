@@ -31,12 +31,12 @@ public class ToDoAppApplication implements CommandLineRunner {
         user.setFirstName("John");
         user.setLastName("Doe");
         user.setEmail("q@q.q");
-        user.setPassword("123");
+        user.setPassword("$2a$12$SNHyR33vnkLFYEFZMkqJmefUZe5TRZmjcbxeckFQ9XVnRp8m6Mzc2");
 
         ToDoItem toDoItem = new ToDoItem();
         toDoItem.setId(1L);
         toDoItem.setDescription("todo app example");
-//        toDoItem.getCompleted();
+        toDoItem.getCompleted();
 
         user.getTodoItems().add(toDoItem);
         toDoItemRepository.save(toDoItem);

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="EN">
 <head>
     <meta charset="ISO-8859-1">
     <title>Todo App</title>
@@ -13,7 +13,10 @@
 
 <nav class="navbar fixed-top bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Todo List</a>
+        <form class="d-flex" th:action="@{/tasklist}" method="get" th:object="${items}">
+            <button class="navbar-brand" type="submit">Todo List-2</button>
+        </form>
+        <a class="navbar-brand" href="/tasklist" >Todo List</a>
         <ul class="nav navbar-nav">
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/logout}">Logout</a>

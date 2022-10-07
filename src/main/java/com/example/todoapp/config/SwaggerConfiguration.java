@@ -55,7 +55,7 @@ public class SwaggerConfiguration {
         AuthorizationScope[] authorizationScopes =
                 new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return List.of(new SecurityReference("JWT", authorizationScopes));
+        return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
     }
 
 
