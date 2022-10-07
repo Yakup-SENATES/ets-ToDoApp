@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
+    public Long getUserId(String email){
+        User user = userRepository.findByEmail(email);
+        return user.getId();
+    }
+
 }

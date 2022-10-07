@@ -51,21 +51,23 @@ public class UserController {
     }
 
     // Delete user's todo item by todo-id
-    @DeleteMapping("{userId}/todos/{todoItemId}")
-    public void deleteTodo(@PathVariable Long userId, @PathVariable Long todoItemId) {
+    @GetMapping("{userId}/todos/{todoItemId}")
+    public void deleteTodo(@PathVariable("userId") Long userId, @PathVariable("todoItemId") Long todoItemId) {
+        System.out.println(userId+" "+todoItemId);
         User user = userRepository.findById(userId).orElseThrow(NoSuchElementException::new);
         ToDoItem toDoItem = toDoItemRepository.findById(todoItemId).orElseThrow(NoSuchElementException::new);
         user.getTodoItems().remove(toDoItem);
         toDoItemRepository.delete(toDoItem);
     }
     // Delete user by id
-    @DeleteMapping("/{userId}")
-    public void deleteTodo(@PathVariable("userId") Long userId) {
+    @DeleteMapping("/delete/{userId}")
+    public void deleteUser(@PathVariable("userId") Long userId) {
         User user = userRepository.findById(userId).orElseThrow(NoSuchElementException::new);
         userRepository.delete(user);
     }
 
-    @GetMapping("/edit/{id}")
+
+    @GetMapping("/edit/item/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));

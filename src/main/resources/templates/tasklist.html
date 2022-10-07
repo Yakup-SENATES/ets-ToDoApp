@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="EN">
 <head>
     <meta charset="ISO-8859-1">
     <title>TodoList</title>
@@ -34,16 +34,22 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="tasklist : ${tasklist}" th:class="${tasklist.completed} ? 'success' : 'warning'">
+            <tr th:each="task : ${tasklist}" th:class="${task.completed} ? 'success' : 'warning'">
                 <td>
                     <div class="btn btn-group-sm" role="group">
-                        <a class="btn btn-info" th:href="@{/users/edit/{id}(id=${tasklist.id)}">Edit</a>
-                        <a class="btn btn-danger" th:href="@{/users/delete/{id}(id=${tasklist.id)}">Delete</a>
+                        <form th:action="@{/users/edit/item/{taskId}(taskId=${task.id})}" method="GET" th:object="${task}">
+                            <button class="btn btn-info" type="submit">Edit</button>
+                        </form>
+                        <form th:action="@{/users/{userId}/todos/{taskId}(userId=${userId},taskId=${task.id})}" th:method="get">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                        <!-- <a class="btn btn-info" th:href="@{/users/edit/${task.id}">Edit</a>
+                         <a class="btn btn-danger" th:href="@{/users/delete/{id}(id=${task.id)}">Delete</a>-->
                     </div>
                 </td>
-                <td th:text="${tasklist.id}">1</td>
-                <td th:text="${tasklist.description}">Finish assesment</td>
-                <td th:text="${tasklist.completed}">true</td>
+                <td th:text="${task.id}">1</td>
+                <td th:text="${task.description}">Finish assesment</td>
+                <td th:text="${task.completed}">true</td>
             </tr>
             </tbody>
         </table>
